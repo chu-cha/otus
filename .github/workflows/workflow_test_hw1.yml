@@ -55,8 +55,8 @@ jobs:
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}/hw1
 
-        - run: cmake --build .
-        - run: cmake --build . --target package
+        cmake --build .
+        cmake --build . --target package
         
 
     - name: Build
