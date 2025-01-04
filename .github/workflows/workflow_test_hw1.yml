@@ -54,7 +54,10 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}/hw1
-        
+
+    - name: Set Patch Number
+      run: cmake . -DPATCH_VERSION=${{ github.run_number }}
+      
     - name: Package 
       run: >
         cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
