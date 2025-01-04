@@ -56,7 +56,7 @@ jobs:
         -S ${{ github.workspace }}/hw1
 
     - name: Set Patch Number
-      run: cmake . -DPATCH_VERSION=${{ github.run_number }}
+      run: cmake ${{ github.workspace }}/hw1 -DPATCH_VERSION=${{ github.run_number }}
       
     - name: Package 
       run: >
