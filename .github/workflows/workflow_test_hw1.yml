@@ -54,6 +54,7 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}/hw1
+        - run: cmake --build . --target package
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
@@ -76,6 +77,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.strings.outputs.build-output-dir }}/HW1.deb
-        asset_name: HW1.deb
+        asset_path: ./HW1-0.0.${{ github.run_number }}-Linux.deb
+        asset_name: HW1-0.0.${{ github.run_number }}-Linux.deb.deb
         asset_content_type: application/vnd.debian.binary-package
