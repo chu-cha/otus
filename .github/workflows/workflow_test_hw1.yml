@@ -23,8 +23,8 @@ jobs:
         build_type: [Release]
         c_compiler: [gcc]
         include:
-          - os: windows-latest
-            c_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
 
     steps:
     - uses: actions/checkout@v4
@@ -34,10 +34,11 @@ jobs:
       id: strings
       shell: bash
       run: |
-        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo "build-output-dir=${{ github.workspace }}/hw1/build" >> "$GITHUB_OUTPUT"
         
     - name: Build Package
       run: |
+        cd ${{ github.workspace }}/hw1
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
