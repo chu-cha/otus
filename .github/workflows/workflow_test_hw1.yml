@@ -43,8 +43,8 @@ jobs:
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
         -S ${{ github.workspace }}/hw1
-         cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-       # cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
+         cmake --build ${{ steps.strings.outputs.build-output-dir }} 
+         cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
 
     - name: Create Release
       id: create_release
