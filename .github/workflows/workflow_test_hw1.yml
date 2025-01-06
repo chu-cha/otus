@@ -39,7 +39,8 @@ jobs:
         
     - name: Build Package
       run: |
-        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        cmake ${{ github.workspace }}/hw1 
+        -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
         -S ${{ github.workspace }}/hw1
