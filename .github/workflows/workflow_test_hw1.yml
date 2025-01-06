@@ -38,12 +38,12 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/hw1/build" >> "$GITHUB_OUTPUT"
         
     - name: Build Package
-      run: |
+      run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        #-DPATCH_VERSION=${{ github.run_number }}
+        -DPATCH_VERSION=${{ github.run_number }}
         -S ${{ github.workspace }}/hw1
-       # cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+         cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
        # cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
 
     - name: Create Release
