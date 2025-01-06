@@ -39,8 +39,6 @@ jobs:
         
     - name: Build Package
       run: |
-        cd ${{ github.workspace }}/hw1
-        echo pwd >> "$GITHUB_OUTPUT"
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
