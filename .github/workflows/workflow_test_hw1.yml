@@ -39,11 +39,10 @@ jobs:
         
     - name: Build Package
       run: |
-        cmake ${{ github.workspace }}/hw1 
-        -B ${{ steps.strings.outputs.build-output-dir }}
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
-        -S ${{ github.workspace }}/hw1
+        -S ${${{ github.workspace }}/hw1}
         cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
         cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
 
