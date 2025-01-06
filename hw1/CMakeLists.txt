@@ -7,10 +7,10 @@ project(HW1 VERSION ${PROJECT_VESRION})
 
 configure_file(version.h.in version.h)
 
-add_executable(helloworldCI main.cpp )
+add_executable(helloworld_cli main.cpp )
 add_library(helloworldLib lib.cpp)
 
-set (ALL_SOURCES helloworldCI helloworldLib)
+set (ALL_SOURCES helloworld_cli helloworldLib)
 
 set_target_properties(${ALL_SOURCES} PROPERTIES
     CXX_STANDARD 14
@@ -21,7 +21,7 @@ target_include_directories(helloworldLib
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(helloworldCI PRIVATE
+target_link_libraries(helloworld_cli PRIVATE
     helloworldLib
 )
 
@@ -38,7 +38,7 @@ foreach(s ${ALL_SOURCES})
 	endif()
 endforeach()
 
-install(TARGETS helloworldCI RUNTIME DESTINATION bin)
+install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
