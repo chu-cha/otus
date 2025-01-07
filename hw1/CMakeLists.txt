@@ -14,14 +14,6 @@ add_library(helloworldLib lib.cpp)
 
 set (ALL_SOURCES helloworld_cli helloworldLib)
 
-if(WITH_BOOST_TEST)	
-    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-    add_executable(test_version test_version.cpp)
-    
-    list(APPEND  $ALL_SOURCES test_version)
-    
-endif()
-
 set_target_properties(${ALL_SOURCES} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
@@ -36,6 +28,13 @@ target_link_libraries(helloworld_cli PRIVATE
 )
 
 if(WITH_BOOST_TEST)
+    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+    add_executable(test_version test_version.cpp)
+
+    set_target_properties(test_version PROPERTIES
+        CXX_STANDARD 14
+        CXX_STANDARD_REQUIRED ON
+    )
 
     set_target_properties(test_version PROPERTIES
         COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
