@@ -39,6 +39,7 @@ jobs:
         
     - name: Build Package
       run: >
+        sudo apt-get update && sudo apt-get install libboost-test-dev -y
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
