@@ -15,18 +15,19 @@ add_library(helloworldLib lib.cpp)
 set (ALL_SOURCES helloworld_cli helloworldLib)
 
 if(WITH_BOOST_TEST)
-    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+    include(FetchContent)
+    FetchContent_Declare(
+ 		 googletest
+  		 URL https://github.com/google/googletest/archive/refs/heads/master.zip
+    )
+    FetchContent_MakeAvailable(googletest)
+ 
     add_executable(test_version test_version.cpp)
 
     list(APPEND $ALL_SOURCES test_version)
 
-    set_target_properties(test_version PROPERTIES
-        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-    )
-
     target_link_libraries(test_version
-        ${Boost_LIBRARIES}
+        GTest::gtest_main
         helloworldLib
     )
 endif()
