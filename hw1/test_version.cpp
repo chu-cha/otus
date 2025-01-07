@@ -3,5 +3,5 @@
 #include "lib.h"
 
 TEST(HelloTest, BasicAssertions) {
-  EXPECT_GT(version(), 0)
+  EXPECT_GT(version(), 0);
 }
