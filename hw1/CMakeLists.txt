@@ -5,12 +5,22 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
 project(helloworld VERSION ${PROJECT_VESRION})
 
+option(WITH_BOOST_TEST "Whether to build Boost test" ON)
+
 configure_file(version.h.in version.h)
 
 add_executable(helloworld_cli main.cpp )
 add_library(helloworldLib lib.cpp)
 
 set (ALL_SOURCES helloworld_cli helloworldLib)
+
+if(WITH_BOOST_TEST)	
+    find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+    add_executable(test_version test_version.cpp)
+    
+    list(APPEND  $ALL_SOURCES test_version)
+    
+endif()
 
 set_target_properties(${ALL_SOURCES} PROPERTIES
     CXX_STANDARD 14
@@ -24,6 +34,19 @@ target_include_directories(helloworldLib
 target_link_libraries(helloworld_cli PRIVATE
     helloworldLib
 )
+
+if(WITH_BOOST_TEST)
+
+    set_target_properties(test_version PROPERTIES
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+    )
+
+    target_link_libraries(test_version
+        ${Boost_LIBRARIES}
+        helloworld
+    )
+endif()
 
 foreach(s ${ALL_SOURCES})
 	if (MSVC)
@@ -47,3 +70,8 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 include(CPack)
 
+
+if(WITH_BOOST_TEST)
+    enable_testing()
+    add_test(test_version test_version)
+endif()
