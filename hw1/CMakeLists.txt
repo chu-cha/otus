@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.20)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
-option(USE_GTEST ON)
-option(USE_BOOST_TEST OFF)
+set(USE_GTEST 1)
+set(USE_BOOST_TEST 0)
 
 project(helloworld VERSION ${PROJECT_VESRION})
 
@@ -15,7 +15,7 @@ add_library(helloworldLib lib.cpp)
 
 set (ALL_SOURCES helloworld_cli helloworldLib)
 
-if(USE_GTEST)
+if(USE_GTEST EQUAL 1 )
     include(FetchContent)
     FetchContent_Declare(
  		 googletest
@@ -30,7 +30,7 @@ if(USE_GTEST)
         helloworldLib
     )
 
-elseif(USE_BOOST_TEST)
+elseif(USE_BOOST_TEST EQUAL 1)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(test_version test_version.cpp)
 
