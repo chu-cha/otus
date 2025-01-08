@@ -2,8 +2,8 @@ name: GitHub Actions Third Try
 on:
   push:
     branches: [ "main" ]
-    #paths: 
-    #- 'hw1/**'
+    paths: 
+    - 'hw1/**'
 
 jobs:
   build:
