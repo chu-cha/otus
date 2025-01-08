@@ -84,8 +84,8 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 include(CPack)
 
-cmake_print_variables(USE_GTEST)
-cmake_print_variables(USE_BOOST_TEST)
+message("The value of USE_GTEST is ${USE_GTEST}")
+message("The value of USE_BOOST_TEST is ${USE_BOOST_TEST}")
 
 if(USE_BOOST_TEST OR USE_GTEST)
     enable_testing()
