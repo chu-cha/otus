@@ -6,7 +6,7 @@
 TEST(HelloTest, BasicAssertions) {
   EXPECT_GT(version(), 0);
 }
-#elif
+#else
 
 #define BOOST_TEST_MODULE test_version
 
