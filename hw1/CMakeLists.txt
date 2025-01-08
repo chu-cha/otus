@@ -13,7 +13,6 @@ add_library(helloworldLib lib.cpp)
 set (ALL_SOURCES helloworld_cli helloworldLib)
 
 if(USE_GTEST EQUAL  1 )
-    add_compile_definitions ( DEF_GTEST )
     include(FetchContent)
     FetchContent_Declare(
  		 googletest
@@ -29,7 +28,6 @@ if(USE_GTEST EQUAL  1 )
     )
 
 elseif(USE_BOOST_TEST EQUAL 1)
-    add_compile_definitions ( DEF_BOOST_TEST )
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(test_version test_version.cpp)
 
@@ -86,7 +84,7 @@ include(CPack)
 message("The value of USE_GTEST is ${USE_GTEST}")
 message("The value of USE_BOOST_TEST is ${USE_BOOST_TEST}")
 
-if(USE_BOOST_TEST OR USE_GTEST)
+if((USE_BOOST_TEST EQUAL 1) OR (USE_GTEST  EQUAL 1)
     enable_testing()
     add_test(test_version test_version)
 endif()
