@@ -1,2 +1,4 @@
 #pragma once
 #cmakedefine PROJECT_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#cmakedefine USE_GTEST @USE_GTEST@
+#cmakedefine USE_BOOST_TEST @USE_BOOST_TEST@
