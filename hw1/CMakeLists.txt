@@ -84,7 +84,7 @@ include(CPack)
 message("The value of USE_GTEST is ${USE_GTEST}")
 message("The value of USE_BOOST_TEST is ${USE_BOOST_TEST}")
 
-if((USE_BOOST_TEST EQUAL 1) OR (USE_GTEST  EQUAL 1)
+if((USE_BOOST_TEST EQUAL 1) OR (USE_GTEST  EQUAL 1))
     enable_testing()
     add_test(test_version test_version)
 endif()
