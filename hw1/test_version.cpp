@@ -1,6 +1,6 @@
 #include "lib.h"
 
-#ifdef DEF_GTEST
+#if USE_GTEST == 1
 #include <gtest/gtest.h>
 
 TEST(HelloTest, BasicAssertions) {
@@ -9,7 +9,7 @@ TEST(HelloTest, BasicAssertions) {
 #endif
 
 
-#ifdef DEF_BOOST_TEST
+#if DEF_BOOST_TEST == 1
 #define BOOST_TEST_MODULE test_version
 
 #include <boost/test/unit_test.hpp>
