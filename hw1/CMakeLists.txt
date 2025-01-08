@@ -13,6 +13,7 @@ add_library(helloworldLib lib.cpp)
 set (ALL_SOURCES helloworld_cli helloworldLib)
 
 if(USE_GTEST EQUAL  1 )
+    add_compile_definitions(WITH_GTEST)
     include(FetchContent)
     FetchContent_Declare(
  		 googletest
@@ -28,6 +29,7 @@ if(USE_GTEST EQUAL  1 )
     )
 
 elseif(USE_BOOST_TEST EQUAL 1)
+    add_compile_definitions(WITH_BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
     add_executable(test_version test_version.cpp)
 
