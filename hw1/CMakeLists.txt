@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.20)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
+option(USE_GTEST ON)
+option(USE_BOOST_TEST OFF)
+
 project(helloworld VERSION ${PROJECT_VESRION})
 
 configure_file(version.h.in version.h)
