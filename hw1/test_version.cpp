@@ -1,12 +1,5 @@
 #include "lib.h"
 
-#if USE_GTEST
-#include <gtest/gtest.h>
-
-TEST(HelloTest, BasicAssertions) {
-  EXPECT_GT(version(), 0);
-}
-#endif
 
 #if USE_BOOST_TEST
 
