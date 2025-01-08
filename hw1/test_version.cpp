@@ -1,13 +1,15 @@
 #include "lib.h"
 
-#if USE_GTEST == 1
+#ifdef DEF_GTEST
 #include <gtest/gtest.h>
 
 TEST(HelloTest, BasicAssertions) {
   EXPECT_GT(version(), 0);
 }
-#else
+#endif
 
+
+#ifdef DEF_BOOST_TEST
 #define BOOST_TEST_MODULE test_version
 
 #include <boost/test/unit_test.hpp>
