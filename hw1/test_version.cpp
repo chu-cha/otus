@@ -8,7 +8,7 @@ TEST(HelloTest, BasicAssertions) {
 }
 #endif
 
-#ifdef USE_GTEST
+#ifdef USE_BOOST_TEST
 
 #define BOOST_TEST_MODULE test_version
 #include <boost/test/unit_test.hpp>
