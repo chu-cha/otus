@@ -50,7 +50,7 @@ elseif($USE_TESTS EQUAL "BOOST_TEST")
 	)
 	set(USE_GTEST "0" )
 	set(USE_BOOST_TEST "1")
-else 
+else()
 	set(USE_GTEST "0" )
 	set(USE_BOOST_TEST "0")
 
