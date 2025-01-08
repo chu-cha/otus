@@ -1,6 +1,6 @@
 #include "lib.h"
 
-#if USE_GTEST
+#if USE_GTEST == 1
 #include <gtest/gtest.h>
 
 TEST(HelloTest, BasicAssertions) {
