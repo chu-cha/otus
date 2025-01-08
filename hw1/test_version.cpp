@@ -20,4 +20,5 @@ BOOST_AUTO_TEST_CASE(test_valid_version) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+#endif
 
