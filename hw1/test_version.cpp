@@ -6,11 +6,10 @@
 TEST(HelloTest, BasicAssertions) {
   EXPECT_GT(version(), 0);
 }
-#endif
+#elif
 
 #define BOOST_TEST_MODULE test_version
 
-#if USE_BOOST_TEST
 #include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_SUITE(test_version)
