@@ -40,7 +40,8 @@ jobs:
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DPATCH_VERSION=${{ github.run_number }}
-        -DUSE_TESTS="GTEST"
+        -DUSE_GTEST=1
+        -DUSE_BOOST_TEST=0
         -S ${{ github.workspace }}/hw1
          cmake --build ${{ steps.strings.outputs.build-output-dir }} 
          cmake --build ${{ steps.strings.outputs.build-output-dir }} --target test
