@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include<iterator>
+
 
 template<typename T>
 std::vector<T> split( std::string str, char delimiter)
