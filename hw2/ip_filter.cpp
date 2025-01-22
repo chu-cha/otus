@@ -34,7 +34,7 @@ void print(const std::vector<std::vector<T>>& ip_pool)
 {
     for (const auto& ip : ip_pool)
     {
-        for (int i = 0; i < ip.size() - 1; i++)
+        for (auto i = 0; i < ip.size() - 1; i++)
             std::cout << ip[i] << ".";
 
         std::cout << ip.back() << '\n';
