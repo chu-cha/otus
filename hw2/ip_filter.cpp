@@ -1,30 +1,42 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include<iterator>
+#include <iterator>
+#include <algorithm>
 
 
 template<typename T>
-std::vector<T> split( std::string str, char delimiter)
+std::vector<T> split(std::string str, char delimiter)
 {
     std::vector<T> res;
     size_t start = 0;
     size_t pos = 0;
 
-    auto push_to_res = [&res](std::string s){
+    auto push_to_res = [&res](std::string s) {
         std::stringstream ss;
         ss << s;
         T val;
         ss >> val;
         res.push_back(val); };
- 
+
     while ((pos = str.find(delimiter, start)) != std::string::npos) {
         push_to_res(str.substr(start, pos));
-        start = pos+1;
+        start = pos + 1;
     }
     push_to_res(str.substr(start));
 
     return res;
+}
+
+
+template<typename T>
+void print(const std::vector<std::vector<T>>& ip_pool)
+{
+    for (auto&& v : ip_pool)
+    {
+        std::copy(v.begin(), v.end(), std::ostream_iterator<T>(std::cout, " "));
+        std::cout << '\n';
+    }
 }
 
 
@@ -34,21 +46,56 @@ int main()
     {
         std::vector<std::vector<int>> ip_pool;
 
-        for(std::string line; std::getline(std::cin, line);)
+        for (std::string line; std::getline(std::cin, line);)
         {
-           
-            std::vector<std::string> v = split<std::string>(line,'\t');
+            std::vector<std::string> v = split<std::string>(line, '\t');
             ip_pool.push_back(split<int>(v.at(0), '.'));
         }
 
-        std::cout << "RESULT: " << std::endl;
-        for(auto&& v: ip_pool)
-        {
-            std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
-            std::cout << '\n';
-        }
+        /*std::cout << "RESULT: " << std::endl;
+        print(ip_pool);*/
 
-       
+        // pass ip_pool by value to avoid changing
+        auto ip_sort = [](auto ip_pool) {
+            std::sort(ip_pool.begin(), ip_pool.end(), std::greater<decltype(ip_pool.front())>());
+            return ip_pool;
+            };
+
+        auto filter = [&ip_pool](int part_value_1, int part_value_2 = -1) {
+
+            std::remove_reference_t<decltype(ip_pool)> res;
+
+            std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(res), [part_value_1, part_value_2](const auto& ip) {
+
+                return ((ip[0] == part_value_1) && ((part_value_2 >= 0) ? (ip[1] == part_value_2) : true)); });
+            return res;
+            };
+
+        auto filter_any = [&ip_pool](int value) {
+
+            std::remove_reference_t<decltype(ip_pool)> res;
+
+            std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(res), [value](const auto& ip) {
+
+                bool r = false;
+
+                for (const auto& p : ip)
+                    if (p == value) {
+                        r = true;
+                        break;
+                    }
+                return r;
+
+                ; });
+
+            return res;
+            };
+
+        print(ip_sort(ip_pool));
+        print(filter_any(46));
+        print(filter(1));
+        print(filter(46, 70));
+
 
         // 222.173.235.246
         // 222.130.177.64
@@ -113,7 +160,7 @@ int main()
         // 39.46.86.85
         // 5.189.203.46
     }
-    catch(const std::exception &e)
+    catch (const std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }
