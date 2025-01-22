@@ -32,10 +32,12 @@ std::vector<T> split(std::string str, char delimiter)
 template<typename T>
 void print(const std::vector<std::vector<T>>& ip_pool)
 {
-    for (auto&& v : ip_pool)
+    for (const auto& ip : ip_pool)
     {
-        std::copy(v.begin(), v.end(), std::ostream_iterator<T>(std::cout, " "));
-        std::cout << '\n';
+        for (int i = 0; i < ip.size() - 1; i++)
+            std::cout << ip[i] << ".";
+
+        std::cout << ip.back() << '\n';
     }
 }
 
@@ -56,7 +58,7 @@ int main()
         print(ip_pool);*/
 
         // pass ip_pool by value to avoid changing
-        auto ip_sort = [](auto ip_pool) {
+        auto ip_sort = [](auto& ip_pool) {
             std::sort(ip_pool.begin(), ip_pool.end(), std::greater<decltype(ip_pool.front())>());
             return ip_pool;
             };
@@ -92,9 +94,10 @@ int main()
             };
 
         print(ip_sort(ip_pool));
-        print(filter_any(46));
         print(filter(1));
         print(filter(46, 70));
+        print(filter_any(46)); 
+        
 
 
         // 222.173.235.246
