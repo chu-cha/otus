@@ -54,10 +54,6 @@ int main()
             ip_pool.push_back(split<int>(v.at(0), '.'));
         }
 
-        /*std::cout << "RESULT: " << std::endl;
-        print(ip_pool);*/
-
-        // pass ip_pool by value to avoid changing
         auto ip_sort = [](auto& ip_pool) {
             std::sort(ip_pool.begin(), ip_pool.end(), std::greater<decltype(ip_pool.front())>());
             return ip_pool;
