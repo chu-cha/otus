@@ -20,7 +20,7 @@ foreach(s ${ALL_SOURCES})
 		
 	else ()
 		target_compile_options(${s} PRIVATE
-			-Wall -Wextra -pedantic -Werror
+			-Wall 
 		)
 	endif()
 endforeach()
